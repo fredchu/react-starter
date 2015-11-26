@@ -12,7 +12,7 @@ var TodoList = React.createClass({
     },
     addTodo: function (e){
         e.preventDefault();
-        var todoCotent = React.findDOMNode(this.refs.todoCotent).value.trim();
+        var todoCotent = ReactDOM.findDOMNode(this.refs.todoCotent).value.trim();
 
         if (!todoCotent) {
           return;
@@ -23,20 +23,20 @@ var TodoList = React.createClass({
         list.push(todoCotent);
 
         this.setState({list: list});
-        React.findDOMNode(this.refs.todoCotent).value = '';
+        ReactDOM.findDOMNode(this.refs.todoCotent).value = '';
     },
     render: function() {
-        var todos = this.state.list.map(function (todo) {
-          return (
-            <li>{todo}</li>
-          );
-        });
-
+        // Code here will be linted with JSHint.
+        /* jshint ignore:start */
         return (
             <div>
                 <h1>Todos count: <span>{this.state.list.length}</span></h1>
                 <ul>
-                    {todos}
+                    {this.state.list.map(function (todo) {
+                       return (
+                         <li key={todo.id}>{todo}</li>
+                       );
+                    })}
                 </ul>
                 <form action="" onSubmit={this.addTodo}>
                     <input type="text" ref="todoCotent" />
@@ -44,10 +44,16 @@ var TodoList = React.createClass({
                 </form>
             </div>
         );
+        // Code here will be ignored by JSHint.
+        /* jshint ignore:end */
     }
 });
 
-React.render(
+ReactDOM.render(
+    // Code here will be linted with JSHint.
+    /* jshint ignore:start */
     <TodoList />,
+    // Code here will be ignored by JSHint.
+    /* jshint ignore:end */
     document.getElementById('wrap')
 );
