@@ -46,6 +46,8 @@ var TodoList = React.createClass({
                     <input type="text" ref="todoCotent" />
                     <input type="submit" value="Add a Todo" />
                 </form>
+                <div>{this.props.testStr}</div>
+                <div>{this.props.testNum}</div>
             </div>
         );
 
@@ -54,11 +56,20 @@ var TodoList = React.createClass({
     }
 });
 
+TodoList.propTypes = {
+    testStr: React.PropTypes.string,
+    testNum: React.PropTypes.number.isRequired
+};
+
+TodoList.defaultProps = {
+    testStr: 'just a test string'
+};
+
 ReactDOM.render(
 
     // Code here will be linted with JSHint.
     /* jshint ignore:start */
-    <TodoList />,
+    <TodoList testNum={111} />,
 
     // Code here will be ignored by JSHint.
     /* jshint ignore:end */
