@@ -23,18 +23,19 @@
 
         addTodo: function(e) {
             e.preventDefault();
-            var todoContent = ReactDOM.findDOMNode(this.refs.todoContent).value.trim();
+            let todoContent = this.refs.todoContent.value.trim();
 
             if (!todoContent) {
               return;
             }
 
-            var list = this.state.list;
+            let list = this.state.list;
 
             list.push(todoContent);
 
             this.setState({list: list});
-            ReactDOM.findDOMNode(this.refs.todoContent).value = '';
+            // ReactDOM.findDOMNode(this.refs.todoContent).value = '';
+            this.refs.todoContent.value = '';
         },
 
         showCurrentTyping: function(e) {
