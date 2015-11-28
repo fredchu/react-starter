@@ -1,11 +1,24 @@
 (function() {
     var TodoList = React.createClass({
+
+        // getInitialState() executes exactly once during the lifecycle of the component and sets up the initial state of the component.
         getInitialState: function() {
             return {
-                list: this.props.data.list,
-                currentTyping: this.props.data.currentTyping,
-                passedChildren: this.props.children
+                list: [],
+                currentTyping: '',
+                passedChildren: ''
             };
+        },
+
+        // Here, componentDidMount is a method called automatically by React when a component is rendered.
+        componentDidMount: function() {
+            setTimeout(function() {
+                this.setState({
+                    list: this.props.data.list,
+                    currentTyping: this.props.data.currentTyping,
+                    passedChildren: this.props.children
+                });
+            }.bind(this), 5000);
         },
 
         addTodo: function(e) {
