@@ -12,7 +12,8 @@ var TodoList = React.createClass({
 
         return {
             list: list,
-            currentTyping: currentTyping
+            currentTyping: currentTyping,
+            passedChildren: this.props.children
         };
     },
 
@@ -56,6 +57,7 @@ var TodoList = React.createClass({
                 </form>
                 <div>{this.props.testStr}</div>
                 <div>{this.props.testNum}</div>
+                <div>{this.state.passedChildren}</div>
             </div>
         );
 
@@ -68,7 +70,7 @@ ReactDOM.render(
 
     // Code here will be linted with JSHint.
     /* jshint ignore:start */
-    <TodoList testNum={111} />,
+    <TodoList testNum={111}>Just testing children then transformed to state</TodoList>,
 
     // Code here will be ignored by JSHint.
     /* jshint ignore:end */
