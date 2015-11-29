@@ -4,9 +4,9 @@
         // getInitialState() executes exactly once during the lifecycle of the component and sets up the initial state of the component.
         getInitialState: function() {
             return {
+                title: '',
                 list: [],
-                currentTyping: '',
-                passedChildren: ''
+                todoContent: ''
             };
         },
 
@@ -14,16 +14,16 @@
         componentDidMount: function() {
             setTimeout(function() {
                 this.setState({
-                    list: this.props.data.list,
-                    currentTyping: this.props.data.currentTyping,
-                    passedChildren: this.props.children
+                    title: this.state.todoContent || this.props.todoContentPlaceholder,
+                    list: this.props.list,
+                    todoContent: this.props.title
                 });
             }.bind(this), 5000);
         },
 
         addTodo: function(e) {
             e.preventDefault();
-            let todoContent = this.refs.todoContent.value.trim();
+            let todoContent = this.state.todoContent.trim();
 
             if (!todoContent) {
               return;
@@ -33,13 +33,25 @@
 
             list.push(todoContent);
 
-            this.setState({list: list});
-            // ReactDOM.findDOMNode(this.refs.todoContent).value = '';
-            this.refs.todoContent.value = '';
+            this.setState({
+                list: list
+            });
+
+            this.resetTitleAndTodoContent();
         },
 
-        showCurrentTyping: function(e) {
-            this.setState({currentTyping: e.target.value || 'Type some text YEAH'});
+        setTitle: function(e) {
+            this.setState({
+                title: e.target.value.trim() || this.props.todoContentPlaceholder,
+                todoContent: e.target.value
+            });
+        },
+
+        resetTitleAndTodoContent: function() {
+            this.setState({
+                title: this.props.todoContentPlaceholder,
+                todoContent: ''
+            });
         },
 
         render: function() {
@@ -48,7 +60,7 @@
             return (
                 <div>
                     <h1>Todos count: <span>{this.state.list.length}</span></h1>
-                    <h2>You're typing: {this.state.currentTyping}</h2>
+                    <h2>You're typing: {this.state.title}</h2>
                     <ul>
                         {this.state.list.map(function(todo) {
                            return (
@@ -56,12 +68,11 @@
                            );
                         })}
                     </ul>
-                    <form action="" onSubmit={this.addTodo} onChange={this.showCurrentTyping}>
-                        <input type="text" ref="todoContent" />
+                    <form action="" onSubmit={this.addTodo}>
+                        <input type="text" value={this.state.todoContent} onChange={this.setTitle} placeholder={this.props.todoContentPlaceholder}/>
                         <input type="submit" value="Add a Todo" />
                     </form>
-                    <div>{this.props.testStr}</div>
-                    <div>{this.state.passedChildren}</div>
+                    <div>{this.props.children}</div>
                 </div>
             );
 
@@ -71,26 +82,22 @@
     });
 
     (function() {
-        let list = [
-            'jQuery',
-            'ReactJS',
-            'AngularJS',
-            'Vue.js',
-            'Array.observe()'
-        ];
-
-        let currentTyping = 'Type some text YEAH';
-
         let data = {
-            list: list,
-            currentTyping: currentTyping
+            list: [
+                'jQuery',
+                'ReactJS',
+                'AngularJS',
+                'Vue.js',
+                'Array.observe()'
+            ],
+            todoContentPlaceholder: 'Type some text YEAH'
         };
 
         ReactDOM.render(
 
             // Code here will be linted with JSHint.
             /* jshint ignore:start */
-            <TodoList data={data}>Just testing children then transformed to state</TodoList>,
+            <TodoList {...data}>Just testing children then transformed to state</TodoList>,
 
             // Code here will be ignored by JSHint.
             /* jshint ignore:end */
