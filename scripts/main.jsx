@@ -26,7 +26,7 @@
             let todoContent = this.state.todoContent.trim();
 
             if (!todoContent) {
-              return;
+                return;
             }
 
             let list = this.state.list;
@@ -38,8 +38,12 @@
             this.resetTitleAndTodoContent();
         },
 
-        removeTodo: function() {
-            console.log('trigged removeTodo');
+        removeTodo: function(e) {
+            this.state.list.splice(parseInt(e.target.getAttribute('data-index'), 10), 1);
+
+            this.setState({
+                list: this.state.list
+            });
         },
 
         setTitle: function(e) {
@@ -67,11 +71,11 @@
                     <ul>
                         {this.state.list.map(function(todo, index) {
                            return (
-                             <li key={index}><input type="submit" onClick={_this.removeTodo} value="Delete" /> {todo}</li>
+                             <li key={index}><input type="submit" data-index={index} onClick={_this.removeTodo} value="Delete" /> {todo}</li>
                            );
                         })}
                     </ul>
-                    <form action="" onSubmit={this.addTodo}>
+                    <form onSubmit={this.addTodo}>
                         <input type="text" value={this.state.todoContent} onChange={this.setTitle} placeholder={this.props.todoContentPlaceholder}/>
                         <input type="submit" value="Add a Todo" />
                     </form>
