@@ -18,7 +18,7 @@
                     list: this.props.list,
                     todoContent: this.props.title
                 });
-            }.bind(this), 5000);
+            }.bind(this), 1000);
         },
 
         addTodo: function(e) {
@@ -38,6 +38,10 @@
             this.resetTitleAndTodoContent();
         },
 
+        removeTodo: function() {
+            console.log('trigged removeTodo');
+        },
+
         setTitle: function(e) {
             this.setState({
                 title: e.target.value.trim() || this.props.todoContentPlaceholder,
@@ -55,14 +59,15 @@
         render: function() {
             // Code here will be linted with JSHint.
             /* jshint ignore:start */
+            var _this = this;
             return (
                 <div>
                     <h1>Todos count: <span>{this.state.list.length}</span></h1>
                     <h2>You're typing: {this.state.title}</h2>
                     <ul>
-                        {this.state.list.map(function(todo) {
+                        {this.state.list.map(function(todo, index) {
                            return (
-                             <li key={todo.id}>{todo}</li>
+                             <li key={index}><input type="submit" onClick={_this.removeTodo} value="Delete" /> {todo}</li>
                            );
                         })}
                     </ul>
