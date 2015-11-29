@@ -33,9 +33,7 @@
 
             list.push(todoContent);
 
-            this.setState({
-                list: list
-            });
+            this.setState({list: list});
 
             this.resetTitleAndTodoContent();
         },
