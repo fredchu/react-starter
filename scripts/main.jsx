@@ -5,7 +5,7 @@
         getInitialState: function() {
             return {
                 title: '',
-                list: [],
+                todos: [],
                 todoContent: ''
             };
         },
@@ -13,9 +13,18 @@
         // Here, componentDidMount is a method called automatically by React when a component is rendered.
         componentDidMount: function() {
             setTimeout(function() {
+                let todos = this.props.todos.map(function(todoStr, index) {
+                    return {
+                        isEditing: false,
+                        text: todoStr
+                    };
+                });
+
+                console.log(todos);
+
                 this.setState({
                     title: this.state.todoContent || this.props.todoContentPlaceholder,
-                    list: this.props.list,
+                    todos: todos,
                     todoContent: this.props.title
                 });
             }.bind(this), 1000);
@@ -29,20 +38,23 @@
                 return;
             }
 
-            let list = this.state.list;
+            let todos = this.state.todos;
 
-            list.push(todoContent);
+            todos.push({
+                isEditing: false,
+                text: todoContent
+            });
 
-            this.setState({list: list});
+            this.setState({todos: todos});
 
             this.resetTitleAndTodoContent();
         },
 
         removeTodo: function(e) {
-            this.state.list.splice(parseInt(e.target.getAttribute('data-index'), 10), 1);
+            this.state.todos.splice(parseInt(e.target.getAttribute('data-index'), 10), 1);
 
             this.setState({
-                list: this.state.list
+                todos: this.state.todos
             });
         },
 
@@ -66,12 +78,12 @@
             var _this = this;
             return (
                 <div>
-                    <h1>Todos count: <span>{this.state.list.length}</span></h1>
+                    <h1>Todos count: <span>{this.state.todos.length}</span></h1>
                     <h2>You're typing: {this.state.title}</h2>
                     <ul>
-                        {this.state.list.map(function(todo, index) {
+                        {this.state.todos.map(function(todo, index) {
                            return (
-                             <li key={index}><input type="submit" data-index={index} onClick={_this.removeTodo} value="Delete" /> {todo}</li>
+                             <li key={index}><input type="submit" data-index={index} onClick={_this.removeTodo} value="Delete" /> {todo.text}</li>
                            );
                         })}
                     </ul>
@@ -90,7 +102,7 @@
 
     (function() {
         let data = {
-            list: [
+            todos: [
                 'jQuery',
                 'ReactJS',
                 'AngularJS',
