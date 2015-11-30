@@ -20,8 +20,6 @@
                     };
                 });
 
-                console.log(todos);
-
                 this.setState({
                     title: this.state.todoContent || this.props.todoContentPlaceholder,
                     todos: todos,
