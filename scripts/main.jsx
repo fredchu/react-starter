@@ -13,10 +13,11 @@
         // Here, componentDidMount is a method called automatically by React when a component is rendered.
         componentDidMount: function() {
             setTimeout(function() {
-                let todos = this.props.todos.map(function(todoStr, index) {
+                let todos = this.props.todos.map(function(text, index) {
                     return {
                         isEditing: false,
-                        text: todoStr
+                        textToUpdate: text,
+                        text: text
                     };
                 });
 
@@ -28,7 +29,7 @@
             }.bind(this), 1000);
         },
 
-        addTodo: function(e) {
+        createTodo: function(e) {
             e.preventDefault();
             let todoContent = this.state.todoContent.trim();
 
@@ -40,12 +41,69 @@
 
             todos.push({
                 isEditing: false,
+                textToUpdate: todoContent,
                 text: todoContent
             });
 
             this.setState({todos: todos});
 
             this.resetTitleAndTodoContent();
+        },
+
+        toggleEdit: function(e) {
+            e.preventDefault();
+
+            let index = parseInt(e.target.getAttribute('data-index'), 10);
+
+            this.state.todos[index].isEditing = !this.state.todos[index].isEditing;
+
+            this.setState({
+                todos: this.state.todos
+            });
+        },
+
+        updateEditingText: function(e) {
+            var index = parseInt(e.target.getAttribute('data-index'), 10);
+
+            this.state.todos[index].textToUpdate = e.target.value;
+            this.setState({
+                todos: this.state.todos
+            });
+        },
+
+        updateTodo: function(e) {
+            e.preventDefault();
+
+            let index = parseInt(e.target.getAttribute('data-index'), 10);
+
+            if (!this.state.todos[index].textToUpdate) {
+                this.cancelEdit(index);
+                return false;
+            }
+
+            this.state.todos[index].text = this.state.todos[index].textToUpdate;
+
+            this.setState({
+                todos: this.state.todos
+            });
+
+            this.toggleEdit(e);
+        },
+
+        resetEdit: function(index) {
+            let todo = this.state.todos[index];
+
+            todo.textToUpdate = todo.text;
+            this.state.todos[index] = todo;
+
+            this.setState({
+                todos: this.state.todos
+            });
+        },
+
+        cancelEdit: function(e) {
+            this.resetEdit(parseInt(e.target.getAttribute('data-index'), 10));
+            this.toggleEdit(e);
         },
 
         removeTodo: function(e) {
@@ -80,12 +138,28 @@
                     <h2>You're typing: {this.state.title}</h2>
                     <ul>
                         {this.state.todos.map(function(todo, index) {
-                           return (
-                             <li key={index}><input type="submit" data-index={index} onClick={_this.removeTodo} value="Delete" /> {todo.text}</li>
-                           );
+                            return (
+                                <li key={index}>
+                                    {todo.isEditing ? '' :
+                                        <span>
+                                            <input type="submit" data-index={index} onClick={_this.removeTodo} value="Delete"/>
+                                            <input type="submit" data-index={index} onClick={_this.toggleEdit} value="Edit"/>
+                                            {todo.text}
+                                        </span>
+                                    }
+
+                                    {todo.isEditing ?
+                                        <form data-index={index} onSubmit={_this.updateTodo}>
+                                            <input type="text" data-index={index} value={todo.textToUpdate} onChange={_this.updateEditingText} placeholder={_this.props.todoContentPlaceholder}/>
+                                            <input type="submit" value="Update"/>
+                                            <input type="submit" data-index={index} onClick={_this.cancelEdit} value="Cancel"/>
+                                        </form> : ''
+                                    }
+                                </li>
+                            );
                         })}
                     </ul>
-                    <form onSubmit={this.addTodo}>
+                    <form onSubmit={this.createTodo}>
                         <input type="text" value={this.state.todoContent} onChange={this.setTitle} placeholder={this.props.todoContentPlaceholder}/>
                         <input type="submit" value="Add a Todo" />
                     </form>
