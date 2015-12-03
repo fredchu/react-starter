@@ -176,7 +176,7 @@
         let data = {
             todos: [
                 'jQuery',
-                'ReactJS',
+                'React',
                 'AngularJS',
                 'Vue.js',
                 'Array.observe()'

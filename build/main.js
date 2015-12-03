@@ -198,7 +198,7 @@
 
     (function () {
         var data = {
-            todos: ['jQuery', 'ReactJS', 'AngularJS', 'Vue.js', 'Array.observe()'],
+            todos: ['jQuery', 'React', 'AngularJS', 'Vue.js', 'Array.observe()'],
             todoContentPlaceholder: 'Type some text YEAH'
         };
 
