@@ -184,14 +184,19 @@
             todoContentPlaceholder: 'Type some text YEAH'
         };
 
+        // ReactDOM.render(
+
+        //     // Code here will be linted with JSHint.
+        //     /* jshint ignore:start */
+        //     <TodoList {...data}>Just testing children then transformed to state</TodoList>,
+
+        //     // Code here will be ignored by JSHint.
+        //     /* jshint ignore:end */
+        //     document.getElementById('wrap')
+        // );
+
         ReactDOM.render(
-
-            // Code here will be linted with JSHint.
-            /* jshint ignore:start */
             <TodoList {...data}>Just testing children then transformed to state</TodoList>,
-
-            // Code here will be ignored by JSHint.
-            /* jshint ignore:end */
             document.getElementById('wrap')
         );
     }());
