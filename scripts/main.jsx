@@ -29,6 +29,11 @@
             }.bind(this), 1000);
         },
 
+        propTypes: {
+            todos: React.PropTypes.array.isRequired,
+            todoContentPlaceholder: React.PropTypes.string
+        },
+
         createTodo: function(e) {
             e.preventDefault();
             let todoContent = this.state.todoContent.trim();
@@ -172,6 +177,10 @@
         }
     });
 
+    TodoList.defaultProps = {
+        todoContentPlaceholder: 'Default input placeholder'
+    };
+
     (function() {
         let data = {
             todos: [
@@ -181,6 +190,7 @@
                 'Vue.js',
                 'Array.observe()'
             ],
+
             todoContentPlaceholder: 'Type some text YEAH'
         };
 

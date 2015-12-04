@@ -32,6 +32,11 @@
             }).bind(this), 1000);
         },
 
+        propTypes: {
+            todos: React.PropTypes.array.isRequired,
+            todoContentPlaceholder: React.PropTypes.string
+        },
+
         createTodo: function createTodo(e) {
             e.preventDefault();
             var todoContent = this.state.todoContent.trim();
@@ -196,9 +201,14 @@
         }
     });
 
+    TodoList.defaultProps = {
+        todoContentPlaceholder: 'Default input placeholder'
+    };
+
     (function () {
         var data = {
             todos: ['jQuery', 'React', 'AngularJS', 'Vue.js', 'Array.observe()'],
+
             todoContentPlaceholder: 'Type some text YEAH'
         };
 
