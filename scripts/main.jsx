@@ -150,17 +150,30 @@
                                 <li key={index}>
                                     {todo.isEditing ? '' :
                                         <span>
-                                            <input type="submit" data-index={index} onClick={_this.removeTodo} value="Delete"/>
-                                            <input type="submit" data-index={index} onClick={_this.toggleEdit} value="Edit"/>
+                                            <input type="submit"
+                                                data-index={index}
+                                                onClick={_this.removeTodo}
+                                                value="Delete"/>
+                                            <input type="submit"
+                                                data-index={index}
+                                                onClick={_this.toggleEdit}
+                                                value="Edit"/>
                                             {todo.text}
                                         </span>
                                     }
 
                                     {todo.isEditing ?
                                         <form data-index={index} onSubmit={_this.updateTodo}>
-                                            <input type="text" data-index={index} value={todo.textToUpdate} onChange={_this.updateEditingText} placeholder={_this.props.todoContentPlaceholder}/>
+                                            <input type="text"
+                                                data-index={index}
+                                                value={todo.textToUpdate}
+                                                onChange={_this.updateEditingText}
+                                                placeholder={_this.props.todoContentPlaceholder}/>
                                             <input type="submit" value="Update"/>
-                                            <input type="submit" data-index={index} onClick={_this.cancelEdit} value="Cancel"/>
+                                            <input type="submit"
+                                                data-index={index}
+                                                onClick={_this.cancelEdit}
+                                                value="Cancel"/>
                                         </form> : ''
                                     }
                                 </li>
@@ -168,7 +181,10 @@
                         })}
                     </ul>
                     <form onSubmit={this.createTodo}>
-                        <input type="text" value={this.state.todoContent} onChange={this.setTitle} placeholder={this.props.todoContentPlaceholder}/>
+                        <input type="text"
+                            value={this.state.todoContent}
+                            onChange={this.setTitle}
+                            placeholder={this.props.todoContentPlaceholder}/>
                         <input type="submit" value="Add a Todo" />
                     </form>
                     <div>{this.props.children}</div>

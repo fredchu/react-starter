@@ -173,16 +173,29 @@
                             todo.isEditing ? '' : React.createElement(
                                 'span',
                                 null,
-                                React.createElement('input', { type: 'submit', 'data-index': index, onClick: _this.removeTodo, value: 'Delete' }),
-                                React.createElement('input', { type: 'submit', 'data-index': index, onClick: _this.toggleEdit, value: 'Edit' }),
+                                React.createElement('input', { type: 'submit',
+                                    'data-index': index,
+                                    onClick: _this.removeTodo,
+                                    value: 'Delete' }),
+                                React.createElement('input', { type: 'submit',
+                                    'data-index': index,
+                                    onClick: _this.toggleEdit,
+                                    value: 'Edit' }),
                                 todo.text
                             ),
                             todo.isEditing ? React.createElement(
                                 'form',
                                 { 'data-index': index, onSubmit: _this.updateTodo },
-                                React.createElement('input', { type: 'text', 'data-index': index, value: todo.textToUpdate, onChange: _this.updateEditingText, placeholder: _this.props.todoContentPlaceholder }),
+                                React.createElement('input', { type: 'text',
+                                    'data-index': index,
+                                    value: todo.textToUpdate,
+                                    onChange: _this.updateEditingText,
+                                    placeholder: _this.props.todoContentPlaceholder }),
                                 React.createElement('input', { type: 'submit', value: 'Update' }),
-                                React.createElement('input', { type: 'submit', 'data-index': index, onClick: _this.cancelEdit, value: 'Cancel' })
+                                React.createElement('input', { type: 'submit',
+                                    'data-index': index,
+                                    onClick: _this.cancelEdit,
+                                    value: 'Cancel' })
                             ) : ''
                         );
                     })
@@ -190,7 +203,10 @@
                 React.createElement(
                     'form',
                     { onSubmit: this.createTodo },
-                    React.createElement('input', { type: 'text', value: this.state.todoContent, onChange: this.setTitle, placeholder: this.props.todoContentPlaceholder }),
+                    React.createElement('input', { type: 'text',
+                        value: this.state.todoContent,
+                        onChange: this.setTitle,
+                        placeholder: this.props.todoContentPlaceholder }),
                     React.createElement('input', { type: 'submit', value: 'Add a Todo' })
                 ),
                 React.createElement(
