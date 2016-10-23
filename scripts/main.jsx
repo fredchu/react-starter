@@ -13,7 +13,6 @@
         // Here, componentDidMount is a method called automatically by React when a component is rendered.
         componentDidMount: function() {
             setTimeout(function() {
-
                 let todos = this.props.todos.map(function(text, index) {
                     return {
                         isEditing: false,
