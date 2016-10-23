@@ -13,6 +13,7 @@
         // Here, componentDidMount is a method called automatically by React when a component is rendered.
         componentDidMount: function() {
             setTimeout(function() {
+
                 let todos = this.props.todos.map(function(text, index) {
                     return {
                         isEditing: false,
@@ -193,6 +194,17 @@
 
             todoContentPlaceholder: 'Type some text YEAH'
         };
+
+        // ReactDOM.render(
+
+        //     // Code here will be linted with JSHint.
+        //     /* jshint ignore:start */
+        //     <TodoList {...data}>Just testing children then transformed to state</TodoList>,
+
+        //     // Code here will be ignored by JSHint.
+        //     /* jshint ignore:end */
+        //     document.getElementById('wrap')
+        // );
 
         ReactDOM.render(
             <TodoList {...data}>Just testing children then transformed to state</TodoList>,
