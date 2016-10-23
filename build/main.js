@@ -7,6 +7,7 @@
 
         // getInitialState() executes exactly once during the lifecycle of the component and sets up the initial state of the component.
         getInitialState: function getInitialState() {
+            console.log('getInitialState');
             return {
                 title: '',
                 todos: [],
@@ -16,6 +17,7 @@
 
         // Here, componentDidMount is a method called automatically by React when a component is rendered.
         componentDidMount: function componentDidMount() {
+            console.log('componentDidMount');
             setTimeout(function () {
                 var todos = this.props.todos.map(function (text, index) {
                     return {
@@ -138,6 +140,7 @@
         },
 
         render: function render() {
+            console.log('render');
             // Code here will be linted with JSHint.
             /* jshint ignore:start */
             var _this = this;
